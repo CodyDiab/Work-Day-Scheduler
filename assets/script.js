@@ -1,6 +1,5 @@
 let workDay = {
-  "7 AM": "",
-  "8 AM": "",
+  
   "9 AM": "",
   "10 AM": "",
   "11 AM": "",
@@ -9,15 +8,16 @@ let workDay = {
   "2 PM": "",
   "3 PM": "",
   "4 PM": "",
+  "5 PM": "",
 };
 
 
 $(document).ready(function(){
-  // if nothing in local storage then call update scheduled tasks
+  
   if(!localStorage.getItem('workDay')) {
     updateScheduledTasks(workDay);
   } else {
-    // otherise update scheduled tasks
+    
     updateScheduledTasks(JSON.parse(localStorage.getItem('workDay')));
   }
 })
@@ -31,7 +31,7 @@ for(const property in workDay) {
   var hourId = "#hour" + counter;
   var presentHour = moment().hour();
   var timeString = $(hourId).text();
-  var time = hourNumberFromHourString(timeString);
+  var time = stringToNum(timeString);
    
   if(time < presentHour) {
       $(textInput).addClass("bg-dark");
@@ -43,17 +43,16 @@ for(const property in workDay) {
   counter ++;
 }
 
-// get value of textarea and hourString and call saveSchedule when button is clicked
+
 $("button").click(function() {
   value = $(this).siblings("textarea").val();
   hourString = $(this).siblings("div").text();
 
-  // call saveSchedule
   saveSchedule(hourString, value);
 });
 
-// switch statement to convert hour string into hour number
-function hourNumberFromHourString(hourString) {
+
+function stringToNum(hourString) {
   switch(hourString) {
       case "7 AM": return 7;
       case "8 AM": return 8;
@@ -73,19 +72,19 @@ function loadCorrectDataset() {
   return (result ? result : workDay);
 }
 
-// add function to initialize local storage
+// a local storage
 function initializeLocalStorage() {
   localStorage.setItem('workDay', JSON.stringify(workDay));
 };
 
-// add function save to localStorage
+
 function saveToLocalStorage(dayEl) {
   localStorage.setItem('workDay', JSON.stringify(dayEl));
 }
 
-// add function to save schedule
+
 function saveSchedule(hourString, val) {
-  // if nothing in local storage then call initialize local storage
+ 
   if(!localStorage.getItem('workDay')) {
       initializeLocalStorage();
   }
@@ -93,11 +92,10 @@ function saveSchedule(hourString, val) {
   var workHours = JSON.parse(localStorage.getItem('workDay'));
   workHours[hourString] = val
 
-  // call save to local storage
+ 
   saveToLocalStorage(workHours);
 }
 
-// add function to update scheduled tasks
 function updateScheduledTasks(dayElement) {
   $(".schedule-row").each(function(index) {
       var res = $(this).children("div");
