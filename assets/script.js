@@ -22,8 +22,28 @@ $(document).ready(function(){
   }
 })
 
-$('#currentDay').text(moment().format('dddd') + ", " + moment().format('MMMM Do YYYY, h:mm:ss a'));
+// $('#currentDay').text(moment().format('dddd') + ", " + moment().format('MMMM Do YYYY, h:mm:ss a'));
+// //audit clock time every second
+// $(document).ready(function(){
+//   datetime = $('#currentDay')
+//   update();
+//   setInterval(update, 1000);
+// });
+var datetime = null,
+        date = null;
 
+var update = function () {
+    date = moment(new Date())
+    datetime.html(date.format('dddd, MMMM Do YYYY, h:mm:ss a'));
+};
+
+$(document).ready(function(){
+    datetime = $('#currentDay')
+    update();
+    setInterval(update, 1000);
+});
+
+//count to loop through task id nums
 var counter = 9;
 for(const property in workDay) {
   var textInput = "#text-input" + counter;
@@ -101,4 +121,17 @@ function updateScheduledTasks(dayElement) {
       var res = $(this).children("div");
       $(this).children("textarea").text(dayElement[res.text()]);
   })
+}
+//clear day function
+$("#remove-tasks").on("click", function() {
+ 
+  localStorage.removeItem('workDay')
+  window .location.reload();
+  
+})
+
+//interval for page refresh
+window.setInterval('refresh()', (100*60)*30);
+function refresh() {
+  window .location.reload();
 }
