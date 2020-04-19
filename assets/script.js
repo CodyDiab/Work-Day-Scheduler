@@ -1,4 +1,4 @@
-let workDay = {
+let daysToDo = {
   
   "9 AM": "",
   "10 AM": "",
@@ -14,21 +14,15 @@ let workDay = {
 
 $(document).ready(function(){
   
-  if(!localStorage.getItem('workDay')) {
-    updateScheduledTasks(workDay);
+  if(!localStorage.getItem('daysToDo')) {
+    updateScheduledTasks(daysToDo);
   } else {
     
-    updateScheduledTasks(JSON.parse(localStorage.getItem('workDay')));
+    updateScheduledTasks(JSON.parse(localStorage.getItem('daysToDo')));
   }
 })
 
-// $('#currentDay').text(moment().format('dddd') + ", " + moment().format('MMMM Do YYYY, h:mm:ss a'));
-// //audit clock time every second
-// $(document).ready(function(){
-//   datetime = $('#currentDay')
-//   update();
-//   setInterval(update, 1000);
-// });
+
 var datetime = null,
         date = null;
 
@@ -45,9 +39,9 @@ $(document).ready(function(){
 
 //count to loop through task id nums
 var counter = 9;
-for(const property in workDay) {
+for(const property in daysToDo) {
   var textInput = "#text-input" + counter;
-  $(textInput).text(workDay[property]);
+  $(textInput).text(daysToDo[property]);
   var hourId = "#hour" + counter;
   var presentHour = moment().hour();
   var timeString = $(hourId).text();
@@ -63,7 +57,7 @@ for(const property in workDay) {
   counter ++;
 }
 
-
+//save button function
 $("button").click(function() {
   value = $(this).siblings("textarea").val();
   hourString = $(this).siblings("div").text();
@@ -88,28 +82,28 @@ function stringToNum(hourString) {
 }
 
 function loadCorrectDataset() {
-  result = localStorage.getItem('workDay')
-  return (result ? result : workDay);
+  result = localStorage.getItem('daysToDo')
+  return (result ? result : daysToDo);
 }
 
 // a local storage
 function initializeLocalStorage() {
-  localStorage.setItem('workDay', JSON.stringify(workDay));
+  localStorage.setItem('daysToDo', JSON.stringify(daysToDo));
 };
 
 
 function saveToLocalStorage(dayEl) {
-  localStorage.setItem('workDay', JSON.stringify(dayEl));
+  localStorage.setItem('daysToDo', JSON.stringify(dayEl));
 }
 
 
 function saveSchedule(hourString, val) {
  
-  if(!localStorage.getItem('workDay')) {
+  if(!localStorage.getItem('daysToDo')) {
       initializeLocalStorage();
   }
 
-  var workHours = JSON.parse(localStorage.getItem('workDay'));
+  var workHours = JSON.parse(localStorage.getItem('daysToDo'));
   workHours[hourString] = val
 
  
@@ -125,7 +119,7 @@ function updateScheduledTasks(dayElement) {
 //clear day function
 $("#remove-tasks").on("click", function() {
  
-  localStorage.removeItem('workDay')
+  localStorage.removeItem('daysToDo')
   window .location.reload();
   
 })
