@@ -24,7 +24,7 @@ $(document).ready(function(){
 
 $('#currentDay').text(moment().format('dddd') + ", " + moment().format('MMMM Do YYYY, h:mm:ss a'));
 
-var counter = 7;
+var counter = 9;
 for(const property in workDay) {
   var textInput = "#text-input" + counter;
   $(textInput).text(workDay[property]);
@@ -34,7 +34,7 @@ for(const property in workDay) {
   var time = stringToNum(timeString);
    
   if(time < presentHour) {
-      $(textInput).addClass("bg-dark");
+      $(textInput).addClass("past");
   } else if (time > presentHour) {
       $(textInput).addClass("future");
   } else {
@@ -51,11 +51,10 @@ $("button").click(function() {
   saveSchedule(hourString, value);
 });
 
-
+// coversion 
 function stringToNum(hourString) {
   switch(hourString) {
-      case "7 AM": return 7;
-      case "8 AM": return 8;
+  
       case "9 AM": return 9;
       case "10 AM": return 10;
       case "11 AM": return 11;
@@ -64,6 +63,7 @@ function stringToNum(hourString) {
       case "2 PM": return 14;
       case "3 PM": return 15;
       case "4 PM": return 16;
+      case "5 PM": return 17;
   }
 }
 
