@@ -38,6 +38,7 @@ $(document).ready(function(){
 });
 
 //count to loop through task id nums
+
 var counter = 9;
 for(const property in daysToDo) {
   var textInput = "#text-input" + counter;
@@ -55,7 +56,11 @@ for(const property in daysToDo) {
       $(textInput).addClass("present");
   }
   counter ++;
+  console.log("its working")
 }
+
+
+
 
 //save button function
 $("button").click(function() {
@@ -65,7 +70,7 @@ $("button").click(function() {
   saveSchedule(hourString, value);
 });
 
-// coversion 
+// string conversion 
 function stringToNum(hourString) {
   switch(hourString) {
   
@@ -86,7 +91,7 @@ function loadCorrectDataset() {
   return (result ? result : daysToDo);
 }
 
-// a local storage
+// to local storage
 function initializeLocalStorage() {
   localStorage.setItem('daysToDo', JSON.stringify(daysToDo));
 };
