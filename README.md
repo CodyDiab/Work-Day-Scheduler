@@ -1,6 +1,7 @@
 # Work-Day-Scheduler
 
 ### A persistant and clear visual of the day ahead.
+#### Developed from my beta workday-wizard
 ### featuring continuous date and time down to the second
 ### colour coded for urgency as apointment arives
 ### prevent loss of appointment with convient local save
