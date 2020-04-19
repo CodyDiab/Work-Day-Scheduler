@@ -56,19 +56,8 @@ for(const property in daysToDo) {
       $(textInput).addClass("present");
   }
   counter ++;
-  console.log("its working")
+  
 }
-
-
-
-
-//save button function
-$("button").click(function() {
-  value = $(this).siblings("textarea").val();
-  hourString = $(this).siblings("div").text();
-
-  saveSchedule(hourString, value);
-});
 
 // string conversion 
 function stringToNum(hourString) {
@@ -85,6 +74,17 @@ function stringToNum(hourString) {
       case "5 PM": return 17;
   }
 }
+
+
+//save button function
+$("button").click(function() {
+  value = $(this).siblings("textarea").val();
+  hourString = $(this).siblings("div").text();
+
+  saveSchedule(hourString, value);
+});
+
+
 
 function loadCorrectDataset() {
   result = localStorage.getItem('daysToDo')
