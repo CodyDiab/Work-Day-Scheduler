@@ -22,7 +22,7 @@ $(document).ready(function(){
   }
 })
 
-
+//persistant clock 
 var datetime = null,
         date = null;
 
